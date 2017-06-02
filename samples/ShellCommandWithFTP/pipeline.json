@@ -57,7 +57,7 @@
       "runsOn": {
         "ref": "EC2ResourceObj"
       },
-      "command": "sftp -b ${Input_STAGING_DIR}/ftpcommands #{user}@#{host}; wc -l data > ${OUTPUT1_STAGING_DIR}/linecount.txt;"
+      "command": "sftp -b ${Input_STAGING_DIR}/ftpcommands -P 2222 -i ${Input_STAGING_DIR}/${pk} #{user}@#{host}; wc -l data > ${OUTPUT1_STAGING_DIR}/linecount.txt;"
     },
     {
       "myComment": "This object is used to create an Amazon EC2 Instance that activities in the pipeline can run on.",
@@ -103,6 +103,12 @@
 
       "id": "host",
       "type": "String"
+    },
+    {
+      "myComment": "This Parameter specifies sftp public key",
+
+      "id": "pk",
+      "type": "AWS::S3::ObjectKey"
     }
   ]
 }
